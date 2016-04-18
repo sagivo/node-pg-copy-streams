@@ -41,7 +41,6 @@ var copyFrom = require('pg-copy-streams').from;
 pg.connect(function(err, client, done) {
   var stream = client.query(copyFrom('COPY my_table FROM STDIN'));
   var fileStream = fs.createReadStream('some_file.tsv')
-  fileStream.on('error', done);
   fileStream.pipe(stream).on('finish', done).on('error', done);
 });
 ```
